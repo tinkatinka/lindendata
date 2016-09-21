@@ -29,6 +29,9 @@ run: ## start development server
 	$(webpack-dashboard) -- $(webpack-dev-server) --host ${HOST} --port ${PORT} --hot --inline --content-base public/ \
 	  --history-api-fallback --display-error-details
 
+build:
+	NODE_ENV=production ./node_modules/.bin/webpack --progress -p
+
 .PHONY: help
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
