@@ -1,0 +1,15 @@
+[ignore]
+.*/webpack.config.js
+.*/node_modules/fbjs/
+.*/node_modules/json5/
+.*/node_modules/radium/src/components/style-root.js
+.*/node_modules/radium/src/components/style-sheet.js
+.*/node_modules/radium/src/components/style.js
+.*/node_modules/radium/src/enhancer.js
+
+[include]
+
+[libs]
+
+[options]
+suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe

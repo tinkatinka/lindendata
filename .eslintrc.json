@@ -1,0 +1,58 @@
+{
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "env": {
+      "mocha": true
+    },
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "rules": {
+      "indent": [1, 2, { "SwitchCase": 0 }],
+      "jsx-quotes": [1, "prefer-single"],
+      "max-len": [1, {"code": 128, "tabWidth": 2, "ignoreUrls": true, "ignoreTrailingComments": true}],
+      "new-cap": [1, {
+        "capIsNewExceptions": [
+          "IList",
+          "IMap",
+          "IntercomAPI",
+          "IOrderedMap",
+          "IOrderedSet",
+          "ISet",
+          "Iis",
+          "Radium"
+        ],
+        "newIsCapExceptions": [
+          "videojs"
+        ]
+      }],
+      "no-underscore-dangle": [1, { "allowAfterThis": true }],
+      "no-unused-vars": [1, {"vars": "all", "args": "all", "argsIgnorePattern": "^_"}],
+      "quotes": [1, "single"],
+      "react/sort-comp": [1, {
+         "order": [
+            "static-methods",
+            "lifecycle",
+            "render",
+            "everything-else"
+          ],
+          "groups": {
+            "lifecycle": [
+              "state",
+              "constructor",
+              "shouldComponentUpdate",
+              "mixins",
+              "propTypes",
+              "getDefaultProps",
+              "getInitialState",
+              "componentWillMount",
+              "componentDidMount",
+              "componentWillUnmount",
+              "componentWillReceiveProps",
+              "componentWillUpdate",
+              "componentDidUpdate"
+            ]
+          }
+        }]
+    }
+}
