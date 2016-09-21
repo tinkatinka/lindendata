@@ -1,6 +1,6 @@
 ## LindenDataVisualizer 0.0.1
 
-### LindenData grabs data from a Google Doc Spreadsheet and visualizes them in Virtual Reality.
+### LindenData grabs data from a Google Doc Spreadsheet and visualizes it in Virtual Reality.
 
 Every cell in the spreadsheet denotes the position in the VR space (like on a chess board). Sheet 1 is "unglanced", sheet 2 is "glanced". Please use the following format: VALUE:DESCRIPTION TEXT:OBJECTTYPE. (Example: _1500:Pineapples sold 2015:fiona1_)
 
