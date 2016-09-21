@@ -29,8 +29,13 @@ run: ## start development server
 	$(webpack-dashboard) -- $(webpack-dev-server) --host ${HOST} --port ${PORT} --hot --inline --content-base public/ \
 	  --history-api-fallback --display-error-details
 
+.PHONY: build
 build:
 	NODE_ENV=production ./node_modules/.bin/webpack --progress -p
+
+.PHONY: deploy
+deploy:
+	rsync -avP public/* uberspace:www/lindendata.tinkatinka.com/
 
 .PHONY: help
 help:
