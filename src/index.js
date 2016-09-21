@@ -1,17 +1,27 @@
 // @flow
 
 import React from 'react';
-import { IndexRoute, Router, Route, browserHistory } from 'react-router';
+import { Map as IMap, OrderedSet as IOrderedSet } from 'immutable';
 import { render } from 'react-dom';
 
-import App from './component/App';
 import ScreenMain from './component/ScreenMain';
 
 render(
-  <Router history={browserHistory}>
-    <Route path='/' component={App} >
-      <IndexRoute component={ScreenMain} />
-    </Route>
-  </Router>,
+  <ScreenMain
+    assets={IOrderedSet([
+      IMap({
+        x: 5,
+        y: 2,
+      }),
+      IMap({
+        x: 1,
+        y: 2,
+      }),
+      IMap({
+        x: 3,
+        y: 1,
+      }),
+    ])}
+  />,
   document.getElementById('root'),
 );
