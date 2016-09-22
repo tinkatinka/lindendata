@@ -32,7 +32,7 @@ Possible colors:
 - blue
 - yellow
 - black
-- HTML color codes (e.g. 8E1C1C)
+- HTML color codes (e.g. #8E1C1C)
 
 **Google Spreadsheet URL:** https://docs.google.com/spreadsheets/d/1xMjMsQ_nLzSHMhL63wz6Rt19rr9HHHqgqHjCztHptYs/edit#gid=0
 
