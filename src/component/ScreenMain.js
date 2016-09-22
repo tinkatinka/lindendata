@@ -71,7 +71,7 @@ class ScreenMain extends Component {
                 if (r) {
                   const listen = () => {
                     this.setState({
-                      curPos: this.state.moveToPos,
+                      currentPos: this.state.moveToPos,
                       moveToPos: IMap(),
                     });
                     r.removeEventListener('animationend', listen);
