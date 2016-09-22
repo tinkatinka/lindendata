@@ -17,7 +17,6 @@ class ScreenMain extends Component {
 
   componentWillMount() {
     gFetch(newData => {
-      console.log('newData', newData);
       this.setState({
         data: newData,
       });
@@ -25,6 +24,7 @@ class ScreenMain extends Component {
   }
 
   render() {
+    console.log('render with', this.state.data.size);
     return (
       <a-scene
         vr-mode-ui={'enabled: true'}
@@ -46,11 +46,10 @@ class ScreenMain extends Component {
   renderDataUnbound() {
     return this.state.data.map((o, idx) => (
       <a-box
-        color='tomato'
-        depth='1'
-        height='1'
+        material='color: tomato; metalness: 0.7'
         key={idx}
-        width='1'
+        position={`${o.get('x')} 0 ${o.get('z')}`}
+        scale={`1 ${o.getIn(['values', 0], 0)} 1`}
       />
     ));
     // {props.assets.toList().map((a, idx) => <a-entity key={idx} collada-model='#cube1' position={`${a.get('x')} 0 ${a.get('y')}`} scale={`0.1 ${0.1 * idx} 0.1`} />)}
