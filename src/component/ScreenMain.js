@@ -55,10 +55,13 @@ class ScreenMain extends Component {
     const nextPosZ = this.state.moveToPos.get('z');
     const curPos = `${curPosX} 0 ${curPosZ}`;
     const nextPos = `${nextPosX} 0 ${nextPosZ}`;
+    const curserBig = '0.02 0.02 0.02';
+    const cursorSmall = '0.005 0.005 0.005';
     return (
       <a-scene
         vr-mode-ui={'enabled: true'}
       >
+        <a-sky color='#6EBAA7'></a-sky>
         <a-entity position={curPos}>
           {this.state.moveToPos.isEmpty() ? null : (
             <a-animation
@@ -86,31 +89,30 @@ class ScreenMain extends Component {
               cursor='fuse: true; fuseTimeout: 500'
               geometry='primitive: ring'
               material='color: black; shader: flat'
-              position='0 0 -0.01'
-              scale='0.0001 0.0001 0.1'
+              position='0 0 -1'
+              scale={curserBig}
             >
               <a-animation
                 attribute='scale'
                 begin='click'
                 easing='ease-in'
                 fill='backwards'
-                from='0.00005 0.00005 0.1'
-                to='0.0001 0.0001 0.1'
+                from={cursorSmall}
+                to={curserBig}
               />
               <a-animation
                 attribute='scale'
                 begin='cursor-fusing'
                 easing='ease-in'
                 fill='forwards'
-                from='0.0001 0.0001 0.1'
-                to='0.00005 0.00005 0.1'
+                from={curserBig}
+                to={cursorSmall}
               />
             </a-entity>
           </a-camera>
         </a-entity>
         <a-assets>
-          <a-asset-item id='cube1' src='/assets/cube1.dae'></a-asset-item>
-          <a-asset-item id='cube2' src='/assets/cube2.dae'></a-asset-item>
+          <audio id='soundclick' src='/assets/sound1LR.mp3' />
         </a-assets>
         {this.renderData()}
         {this.renderMovementPoints()}
@@ -185,18 +187,103 @@ class ScreenMain extends Component {
       let scaleY = o.getIn(['values', sIdx]);
       const posY = scaleY / 2;
       scaleY = adaptScale(scaleY);
-      return (
-        <a-box
-          material={`color: ${color}; metalness: 0.6`}
-          key={idx}
-          position={`${x} ${posY} ${z}`}
-          scale={`0.9 ${scaleY} 0.9`}
-        >
-          {this.statesAnimations(o, sIdx)}
-        </a-box>
-      );
+      const model = o.getIn(['models', sIdx]);
+      switch (model) {
+      case 'sphere':
+        return (
+          <a-sphere
+            material={`color: ${color}; metalness: 0.6`}
+            key={idx}
+            position={`${x} ${posY} ${z}`}
+            radius={0.5}
+            scale={`0.9 ${scaleY} 0.9`}
+            sound='src: #soundclick; on: click'
+          >
+            {this.statesAnimations(o, sIdx)}
+          </a-sphere>
+        );
+      case 'torus':
+        return (
+          <a-torus
+            material={`color: ${color}; metalness: 0.6`}
+            arc='360'
+            key={idx}
+            radius='0.5'
+            radius-tubular='0.1'
+            position={`${x} ${posY} ${z}`}
+            scale={`0.9 ${scaleY} 0.9`}
+            sound='src: #soundclick; on: click'
+          >
+            {this.statesAnimations(o, sIdx)}
+          </a-torus>
+        );
+      case 'octahedron':
+        return (
+          <a-octahedron
+            material={`color: ${color}; metalness: 0.6`}
+            key={idx}
+            radius='0.5'
+            position={`${x} ${posY} ${z}`}
+            scale={`0.9 ${scaleY} 0.9`}
+            sound='src: #soundclick; on: click'
+          >
+            {this.statesAnimations(o, sIdx)}
+          </a-octahedron>
+        );
+      case 'dodecahedron':
+        return (
+          <a-dodecahedron
+            material={`color: ${color}; metalness: 0.6`}
+            key={idx}
+            radius='0.5'
+            position={`${x} ${posY} ${z}`}
+            scale={`0.9 ${scaleY} 0.9`}
+            sound='src: #soundclick; on: click'
+          >
+            {this.statesAnimations(o, sIdx)}
+          </a-dodecahedron>
+        );
+      case 'tetrahedron':
+        return (
+          <a-tetrahedron
+            material={`color: ${color}; metalness: 0.6`}
+            key={idx}
+            radius='0.5'
+            position={`${x} ${posY} ${z}`}
+            scale={`0.9 ${scaleY} 0.9`}
+            sound='src: #soundclick; on: click'
+          >
+            {this.statesAnimations(o, sIdx)}
+          </a-tetrahedron>
+        );
+      case 'cone':
+        return (
+          <a-cone
+            material={`color: ${color}; metalness: 0.6`}
+            key={idx}
+            radius-bottom={"0.5"}
+            radius-top={"0.1"}
+            position={`${x} ${posY} ${z}`}
+            scale={`0.9 ${scaleY} 0.9`}
+            sound='src: #soundclick; on: click'
+          >
+            {this.statesAnimations(o, sIdx)}
+          </a-cone>
+        );
+      default:
+        return (
+          <a-box
+            material={`color: ${color}; metalness: 0.6`}
+            key={idx}
+            position={`${x} ${posY} ${z}`}
+            scale={`0.9 ${scaleY} 0.9`}
+            sound='src: #soundclick; on: click'
+          >
+            {this.statesAnimations(o, sIdx)}
+          </a-box>
+        );
+      }
     });
-    // {props.assets.toList().map((a, idx) => <a-entity key={idx} collada-model='#cube1' position={`${a.get('x')} 0 ${a.get('y')}`} scale={`0.1 ${0.1 * idx} 0.1`} />)}
   }
 
   renderMovementPoints;
