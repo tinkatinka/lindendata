@@ -45,15 +45,15 @@ The data from the Google Docs spreadsheet is parsed via node.js (https://nodejs.
 
 **Credits**
 
-Alexander Matschke, @alexmatschke
+Alexander Matschke, http://twitter.com/alexmatschke
 
 Fiona Valentine Thomann, http://fionavalentinethomann.com
 
 Florian Gmeiner, https://tinkatinka.com
 
-Jan-Keno Janssen, @elektroelvis
+Jan-Keno Janssen, http://twitter.com/elektroelvis
 
-Ronny Esterluss, vragments.com
+Ronny Esterluss, http://vragments.com
 
 This project was made @ VR Journalism Hackathon in Berlin (September 21./22. 2016 / http://vrhackathon.tumblr.com) and is licensed under The MIT License.
 
