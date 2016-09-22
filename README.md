@@ -4,6 +4,8 @@
 
 No coding skills needed: Just put your numbers in a spreadsheet and you're all set. 
 
+![Screenshot](http://keno.w359.de/LindenDataVisualizer/Screenshot_20160922-151239.png)
+
 Some examples: 
 -	You can visualize the sales of pineapples in 2015 with pineapple in different heights 
 -	You can visualize election results with solid blocks (bar graphs) in different colors. When users glance at one bar graph, it changes to a different one (for example: SPD @ Kommunalwahl 2016 vs. 2012
