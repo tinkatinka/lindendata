@@ -33,8 +33,14 @@ check-static: ## perform static analysis
 
 .PHONY: run
 run: ## start development server
+	$(webpack-dev-server) --host ${HOST} --port ${PORT} --hot --inline --content-base public/ \
+	  --history-api-fallback --display-error-details
+
+.PHONY: run_dashboard
+run_dashboard: ## start development server with dashboard
 	$(webpack-dashboard) -- $(webpack-dev-server) --host ${HOST} --port ${PORT} --hot --inline --content-base public/ \
 	  --history-api-fallback --display-error-details
+
 
 .PHONY: build
 build:

@@ -1,7 +1,7 @@
 
-
-var GoogleFetch = function() {
-	const request = 'https://sheets.googleapis.com/v4/spreadsheets/1xMjMsQ_nLzSHMhL63wz6Rt19rr9HHHqgqHjCztHptYs/values/B2:K?key=AIzaSyA77u9rK7o_jskCARMY6LiCNO6aMIzYgMo';
+export default function() {
+	const request = 'https://sheets.googleapis.com/v4/spreadsheets/1xMjMsQ_nLzSHMhL63wz6Rt19rr9HHHqgqHjCztHptYs/sheets?key=AIzaSyA77u9rK7o_jskCARMY6LiCNO6aMIzYgMo';
+	// const request = 'https://sheets.googleapis.com/v4/spreadsheets/1xMjMsQ_nLzSHMhL63wz6Rt19rr9HHHqgqHjCztHptYs/values/B2:K?key=AIzaSyA77u9rK7o_jskCARMY6LiCNO6aMIzYgMo';
 	fetch(request).then(
 		function(response) {
 			var contentType = response.headers.get("content-type");
@@ -49,4 +49,3 @@ var GoogleFetch = function() {
 		}
 	);
 };
-
