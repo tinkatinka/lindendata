@@ -8,7 +8,7 @@
     "url": "git@github.com:tinkatinka/lindendata.git"
   },
   "dependencies": {
-    "aframe": "^0.2.0",
+    "aframe": "^0.3.1",
     "fs": "0.0.1-security",
     "immutable": "^3.8.1",
     "keymirror": "^0.1.1",
