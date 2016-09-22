@@ -3,7 +3,7 @@
 import 'aframe';
 import React, { Component } from 'react';
 import gFetch from '../data/fetchGoogleSheet';
-import { List as IList, Map as IMap } from 'immutable';
+import { is as Iis, List as IList, Map as IMap, Set as ISet } from 'immutable';
 
 function adaptScale(scale) {
   if (scale < 0) {
@@ -13,15 +13,29 @@ function adaptScale(scale) {
 }
 
 let i = 0;
+// const gridRange = [0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5];
+// performance improvement
+const gridRange = [0.5, 2.5, 4.5, 6.5, 8.5];
+const grid = ISet().withMutations(s => {
+  gridRange.forEach(x => {
+    gridRange.forEach(z => {
+      s.add(IMap({ x, z }));
+    });
+  });
+});
 
 class ScreenMain extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      currentPos: IMap({ x: 4.5, z: 4.5 }),
       data: IList(),
+      stateIdxs: IMap(),
+      moveToPos: IMap(),
     };
     this.renderData = this.renderDataUnbound.bind(this);
+    this.renderMovementPoints = this.renderMovementPointsUnbound.bind(this);
     this.statesAnimations = this.statesAnimationsUnbound.bind(this);
   }
 
@@ -30,17 +44,43 @@ class ScreenMain extends Component {
       console.log('newData', newData.toJS());
       this.setState({
         data: newData,
-        stateIdxs: IMap(),
       });
     });
   }
 
   render() {
+    const curPosX = this.state.currentPos.get('x');
+    const curPosZ = this.state.currentPos.get('z');
+    const nextPosX = this.state.moveToPos.get('x');
+    const nextPosZ = this.state.moveToPos.get('z');
+    const curPos = `${curPosX} 0 ${curPosZ}`;
+    const nextPos = `${nextPosX} 0 ${nextPosZ}`;
     return (
       <a-scene
         vr-mode-ui={'enabled: true'}
       >
-        <a-entity position='4.5 0 4.5'>
+        <a-entity position={curPos}>
+          {this.state.moveToPos.isEmpty() ? null : (
+            <a-animation
+              attribute='position'
+              begin='100'
+              easing='ease-in-out'
+              from={curPos}
+              to={nextPos}
+              ref={r => {
+                if (r) {
+                  const listen = () => {
+                    this.setState({
+                      curPos: this.state.moveToPos,
+                      moveToPos: IMap(),
+                    });
+                    r.removeEventListener('animationend', listen);
+                  };
+                  r.addEventListener('animationend', listen);
+                }
+              }}
+            />
+          )}
           <a-camera>
             <a-entity
               cursor='fuse: true; fuseTimeout: 500'
@@ -73,6 +113,7 @@ class ScreenMain extends Component {
           <a-asset-item id='cube2' src='/assets/cube2.dae'></a-asset-item>
         </a-assets>
         {this.renderData()}
+        {this.renderMovementPoints()}
       </a-scene>
     );
   }
@@ -156,6 +197,40 @@ class ScreenMain extends Component {
       );
     });
     // {props.assets.toList().map((a, idx) => <a-entity key={idx} collada-model='#cube1' position={`${a.get('x')} 0 ${a.get('y')}`} scale={`0.1 ${0.1 * idx} 0.1`} />)}
+  }
+
+  renderMovementPoints;
+  renderMovementPointsUnbound() {
+    return grid
+      .filterNot(point => Iis(point, this.state.currentPos))
+      .map(point => {
+        const x = point.get('x');
+        const z = point.get('z');
+        const key = `${x}:${z}`;
+        const position = `${x} 0 ${z}`;
+        return (
+          <a-sphere key={++i} color='lightgrey' position={position} radius='0.04'>
+            <a-animation
+              attribute='scale'
+              begin='click'
+              easing='ease-in'
+              fill='backwards'
+              ref={r => {
+                if (r) {
+                  const listen = () => {
+                    this.setState({
+                      moveToPos: IMap({ x, z }),
+                    });
+                    r.removeEventListener('animationend', listen);
+                  };
+                  r.addEventListener('animationend', listen);
+                }
+              }}
+              to='0 0 0'
+            />
+          </a-sphere>
+        );
+      });
   }
 
 }
