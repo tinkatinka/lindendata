@@ -61,6 +61,7 @@ function parseSheetsData(result) {
               values: IList([first.value]),
               x,
               z,
+              statesCount: 1,
             });
             for (let i = 1; i < maxlen; ++i) {
               const vals = valueRanges[i].values;
@@ -72,6 +73,7 @@ function parseSheetsData(result) {
                     el.update('models', m => m.push(ent.model));
                     el.update('titles', t => t.push(ent.title));
                     el.update('values', v => v.push(ent.value));
+                    el.update('statesCount', s => s + 1);
                   });
                 }
               }
