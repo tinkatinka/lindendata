@@ -46,10 +46,10 @@ class ScreenMain extends Component {
   renderDataUnbound() {
     return this.state.data.map((o, idx) => (
       <a-box
-        material='color: tomato; metalness: 0.7'
+        material={`color: ${o.getIn(['colors', 0])}; metalness: 0.6`}
         key={idx}
         position={`${o.get('x')} 0 ${o.get('z')}`}
-        scale={`1 ${o.getIn(['values', 0], 0)} 1`}
+        scale={`1 ${o.getIn(['values', 0])} 1`}
       />
     ));
     // {props.assets.toList().map((a, idx) => <a-entity key={idx} collada-model='#cube1' position={`${a.get('x')} 0 ${a.get('y')}`} scale={`0.1 ${0.1 * idx} 0.1`} />)}

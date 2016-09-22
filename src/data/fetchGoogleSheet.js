@@ -33,7 +33,9 @@ function parseEntry(entry) {
       const value = parseFloat(desc[0]);
       const title = desc.length > 1 ? desc[1] : 'Untitled';
       const model = desc.length > 2 ? desc[2] : 'box';
+      const color = desc.length > 3 ? desc[3] : 'tomato';
       return {
+        color,
         model,
         title,
         value,
@@ -53,11 +55,12 @@ function parseSheetsData(result) {
           const first = parseEntry(entry);
           if (first) {
             let element = IMap({
+              colors: IList([first.color]),
+              models: IList([first.model]),
+              titles: IList([first.title]),
+              values: IList([first.value]),
               x,
               z,
-              models: IList([first.model]),
-              values: IList([first.value]),
-              titles: IList([first.title]),
             });
             for (let i = 1; i < maxlen; ++i) {
               const vals = valueRanges[i].values;
@@ -65,6 +68,7 @@ function parseSheetsData(result) {
                 const ent = parseEntry(vals[z][x]);
                 if (ent) {
                   element = element.withMutations(el => {
+                    el.update('colors', c => c.push(ent.color));
                     el.update('models', m => m.push(ent.model));
                     el.update('titles', t => t.push(ent.title));
                     el.update('values', v => v.push(ent.value));
