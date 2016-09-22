@@ -24,7 +24,6 @@ class ScreenMain extends Component {
   }
 
   render() {
-    console.log('render with', this.state.data.size);
     return (
       <a-scene
         vr-mode-ui={'enabled: true'}
@@ -44,14 +43,22 @@ class ScreenMain extends Component {
 
   renderData;
   renderDataUnbound() {
-    return this.state.data.map((o, idx) => (
-      <a-box
-        material={`color: ${o.getIn(['colors', 0])}; metalness: 0.6`}
-        key={idx}
-        position={`${o.get('x')} 0 ${o.get('z')}`}
-        scale={`1 ${o.getIn(['values', 0])} 1`}
-      />
-    ));
+    return this.state.data.map((o, idx) => {
+      let scaleY = o.getIn(['values', 0]);
+      let posY = scaleY / 2;
+      if (scaleY < 0) {
+        scaleY *= -1;
+      }
+      console.log('pos', posY, scaleY);
+      return (
+        <a-box
+          material={`color: ${o.getIn(['colors', 0])}; metalness: 0.6`}
+          key={idx}
+          position={`${o.get('x')} ${posY} ${o.get('z')}`}
+          scale={`1 ${scaleY} 1`}
+        />
+      );
+    });
     // {props.assets.toList().map((a, idx) => <a-entity key={idx} collada-model='#cube1' position={`${a.get('x')} 0 ${a.get('y')}`} scale={`0.1 ${0.1 * idx} 0.1`} />)}
   }
 
