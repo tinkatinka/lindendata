@@ -1,6 +1,7 @@
 // @flow
 
 import 'aframe';
+import 'aframe-bmfont-text-component';
 import React, { Component } from 'react';
 import gFetch from '../data/fetchGoogleSheet';
 import { is as Iis, List as IList, Map as IMap, Set as ISet } from 'immutable';
@@ -188,6 +189,7 @@ class ScreenMain extends Component {
       const posY = scaleY / 2;
       scaleY = adaptScale(scaleY);
       const model = o.getIn(['models', sIdx]);
+      const title = o.getIn(['titles', sIdx]);
       switch (model) {
       case 'sphere':
         return (
@@ -199,6 +201,10 @@ class ScreenMain extends Component {
             scale={`0.9 ${scaleY} 0.9`}
             sound='src: #soundclick; on: click'
           >
+            <a-entity
+              position={'-0.1 0 0.55'}
+              bmfont-text={`text: ${title}; color: white`}
+            />
             {this.statesAnimations(o, sIdx)}
           </a-sphere>
         );
@@ -214,6 +220,10 @@ class ScreenMain extends Component {
             scale={`0.9 ${scaleY} 0.9`}
             sound='src: #soundclick; on: click'
           >
+            <a-entity
+              position={'-0.1 0 0.55'}
+              bmfont-text={`text: ${title}; color: white`}
+            />
             {this.statesAnimations(o, sIdx)}
           </a-torus>
         );
@@ -227,6 +237,10 @@ class ScreenMain extends Component {
             scale={`0.9 ${scaleY} 0.9`}
             sound='src: #soundclick; on: click'
           >
+            <a-entity
+              position={'-0.1 0 0.55'}
+              bmfont-text={`text: ${title}; color: white`}
+            />
             {this.statesAnimations(o, sIdx)}
           </a-octahedron>
         );
@@ -240,6 +254,10 @@ class ScreenMain extends Component {
             scale={`0.9 ${scaleY} 0.9`}
             sound='src: #soundclick; on: click'
           >
+            <a-entity
+              position={'-0.1 0 0.55'}
+              bmfont-text={`text: ${title}; color: white`}
+            />
             {this.statesAnimations(o, sIdx)}
           </a-dodecahedron>
         );
@@ -253,6 +271,10 @@ class ScreenMain extends Component {
             scale={`0.9 ${scaleY} 0.9`}
             sound='src: #soundclick; on: click'
           >
+            <a-entity
+              position={'-0.1 0 0.55'}
+              bmfont-text={`text: ${title}; color: white`}
+            />
             {this.statesAnimations(o, sIdx)}
           </a-tetrahedron>
         );
@@ -267,6 +289,10 @@ class ScreenMain extends Component {
             scale={`0.9 ${scaleY} 0.9`}
             sound='src: #soundclick; on: click'
           >
+            <a-entity
+              position={'-0.1 0 0.55'}
+              bmfont-text={`text: ${title}; color: white`}
+            />
             {this.statesAnimations(o, sIdx)}
           </a-cone>
         );
@@ -279,6 +305,10 @@ class ScreenMain extends Component {
             scale={`0.9 ${scaleY} 0.9`}
             sound='src: #soundclick; on: click'
           >
+            <a-entity
+              position={'-0.1 0 0.55'}
+              bmfont-text={`text: ${title}; color: white`}
+            />
             {this.statesAnimations(o, sIdx)}
           </a-box>
         );
