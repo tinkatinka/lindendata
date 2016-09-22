@@ -35,3 +35,6 @@ jspm_packages
 
 public/bundle.js
 public/bundle.js.map
+
+# Config
+config/Config.js

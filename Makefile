@@ -11,7 +11,14 @@ install-deps: init ## install all development dependencies
 
 .PHONY: init
 init: ## all init tasks (deps and template resolv)
+init: init_configs
 	npm install
+
+.PHONY: init_configs ## initialize templated config files
+init_configs: config/Config.js
+
+config/Config.js:
+	cp config/Config.js.template config/Config.js
 
 .PHONY: check
 check: check-lint check-static ## perform all check tasks
