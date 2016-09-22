@@ -65,7 +65,7 @@ function parseSheetsData(result) {
             });
             for (let i = 1; i < maxlen; ++i) {
               const vals = valueRanges[i].values;
-              if (vals[z] && vals[z][x]) {
+              if (vals && vals[z] && vals[z][x]) {
                 const ent = parseEntry(vals[z][x]);
                 if (ent) {
                   element = element.withMutations(el => {
