@@ -28,9 +28,11 @@ class ScreenMain extends Component {
       <a-scene
         vr-mode-ui={'enabled: true'}
       >
-        <a-entity position='0 0 0'>
-          <a-camera></a-camera>
-
+        <a-entity position='4.5 0 4.5'>
+          <a-camera
+            fov={'90'}
+            userHeight={'0'}
+          />
         </a-entity>
         <a-assets>
           <a-asset-item id='cube1' src='/assets/cube1.dae'></a-asset-item>
@@ -45,17 +47,16 @@ class ScreenMain extends Component {
   renderDataUnbound() {
     return this.state.data.map((o, idx) => {
       let scaleY = o.getIn(['values', 0]);
-      let posY = scaleY / 2;
+      const posY = scaleY / 2;
       if (scaleY < 0) {
         scaleY *= -1;
       }
-      console.log('pos', posY, scaleY);
       return (
         <a-box
           material={`color: ${o.getIn(['colors', 0])}; metalness: 0.6`}
           key={idx}
           position={`${o.get('x')} ${posY} ${o.get('z')}`}
-          scale={`1 ${scaleY} 1`}
+          scale={`0.9 ${scaleY} 0.9`}
         />
       );
     });
